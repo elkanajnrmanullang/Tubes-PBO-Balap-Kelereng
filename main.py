@@ -1,10 +1,16 @@
 import pygame
 import os
 import random
+import sys
 
 pygame.init()
 
-# el
+judul = "Balap Kelereng"
+logo_ccb = pygame.image.load(os.path.join("Assets/Design","logo.png"))
+
+pygame.display.set_caption(judul)
+pygame.display.set_icon(logo_ccb)
+
 # Asset
 SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 1100
@@ -15,7 +21,7 @@ RUN = pygame.image.load(os.path.join("Assets/Design", "k_run.png"))
 
 JUMP = pygame.image.load(os.path.join("Assets/Design", "k_run.png"))
 
-DUCK = pygame.image.load(os.path.join("Assets/Design", "k_run.png"))
+DUCK = pygame.image.load(os.path.join("Assets/Design", "k_duck.png"))
 
 DRUM_BERGERAK = pygame.image.load(os.path.join("Assets/Design", "drum_gerak.png"))
 
@@ -32,11 +38,6 @@ FONT = pygame.font.Font(os.path.join("Assets/Other",'PressStart2P-Regular.ttf'),
 BG = pygame.image.load(os.path.join("Assets/Design", "bg.png"))
 
 class Karakter:
-    # SCREEN_HEIGHT = 600
-    # SCREEN_WIDTH = 1100
-    k_posX = 80
-    k_posY = 390
-    k_posDuckY = 410
     k_jump_value = 7.5
 
     def __init__(self):
@@ -52,14 +53,14 @@ class Karakter:
         self.jump_vel = self.k_jump_value
         self.image = self.run_img
         self.k_rect = self.image.get_rect()
-        self.k_rect.x = self.k_posX
-        self.k_rect.y = self.k_posY
+        self.k_rect.x = 80
+        self.k_rect.y = 390
         self.k_jump_sound = pygame.mixer.Sound(os.path.abspath('Assets/Music/jump.mp3'))
         self.k_duck_sound = pygame.mixer.Sound(os.path.abspath('Assets/Music/duck.mp3'))
-
+        self.gravity = 4
 
     def update(self, userInput):
-        if userInput[pygame.K_UP] and not self.k_jump:
+        if (userInput[pygame.K_UP] or userInput[pygame.K_SPACE]) and not self.k_jump:
             self.k_duck = False
             self.k_run = False
             self.k_jump = True
@@ -84,21 +85,18 @@ class Karakter:
         if self.step_index >= 10:
             self.step_index = 0
 
-
     def duck(self):
-        # [self.step_index // 5]
         self.image = self.duck_img
         self.k_rect = self.image.get_rect()
-        self.k_rect.x = self.k_posX
-        self.k_rect.y = self.k_posDuckY
+        self.k_rect.x = 80
+        self.k_rect.y = 410
         self.step_index += 1
 
     def run(self):
-        # [self.step_index // 5]
         self.image = self.run_img
         self.k_rect = self.image.get_rect()
-        self.k_rect.x = self.k_posX
-        self.k_rect.y = self.k_posY
+        self.k_rect.x = 80
+        self.k_rect.y = 390
         self.step_index += 1
 
     def jump(self):
@@ -110,11 +108,19 @@ class Karakter:
             self.k_jump = False
             self.jump_vel = self.k_jump_value
 
-    # def dead(self):
-    #     self.image = self.dead_img
+        if self.k_rect.y < 390:
+            self.k_rect.y += self.gravity
+
+        if self.k_rect.y >= 390:
+            self.k_rect.y = 390
 
     def draw_hitbox(self, SCREEN):
         SCREEN.blit(self.image, (self.k_rect.x, self.k_rect.y))
+        pygame.draw.rect(SCREEN, (255, 0, 0), self.k_rect, 2)
+
+# Tambahkan deklarasi game_speed dan obstacles sebagai variabel global
+game_speed = 15
+obstacles = []
 
 class BalonUdara():
     def __init__(self):
@@ -134,16 +140,16 @@ class BalonUdara():
 
 class Airship():
     def __init__(self):
-        self.x = -random.randint(800, 1000)  # Memulai dari luar layar sebelah kiri
+        self.x = -random.randint(800, 1000)  
         self.y = random.randint(10, 50)
         self.image = AIRSHIP
         self.width = self.image.get_width()
-        self.speed = 1  # Kecepatan yang sangat lambat
+        self.speed = 1  
 
     def update(self):
         self.x += self.speed
         if self.x > SCREEN_WIDTH:
-            self.x = -random.randint(800, 1000)  # Kembali ke luar layar sebelah kiri
+            self.x = -random.randint(800, 1000) 
             self.y = random.randint(50, 100)
 
     def draw_hitbox(self, SCREEN):
@@ -165,6 +171,7 @@ class Obstacle:
 
     def draw_hitbox(self, SCREEN):
         SCREEN.blit(self.image, self.rect)
+        pygame.draw.rect(SCREEN, (255, 0, 0), self.rect, 2)
 
 
 class Drum_Bergerak(Obstacle):
@@ -193,6 +200,7 @@ class Pesawat(Obstacle):
         self.index = 0
 
     def draw_hitbox(self, SCREEN):
+        pygame.draw.rect(SCREEN, (255, 0, 0), self.rect, 2)
         if self.index >= 9:
             self.index = 0
         SCREEN.blit(self.image, self.rect)
@@ -237,7 +245,7 @@ def main():
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                sys.exit()
 
         SCREEN.fill((255, 255, 255))
         userInput = pygame.key.get_pressed()
@@ -263,7 +271,6 @@ def main():
                 death_count += 1
                 menu(death_count)
 
-
         balon_udara_property.draw_hitbox(SCREEN)
         balon_udara_property.update()
 
@@ -272,18 +279,22 @@ def main():
 
         score()
 
-        clock.tick(30)
+        clock.tick(40)
         pygame.display.update()
+
+        if death_count > 0:
+            run = False
 
 def menu(death_count):
     global points
     run = True
     while run:
-        SCREEN.fill((255, 255, 255))
-
         if death_count == 0:
+            SCREEN.fill((255, 255, 255))
             text = FONT.render("Press any Key to Start", True, (0, 0, 0))
         elif death_count > 0:
+            bg = SCREEN.copy()
+            SCREEN.blit(bg, (0, 0))
             text = FONT.render("Press any Key to Restart", True, (0, 0, 0))
             score = FONT.render("Your Score: " + str(points), True, (0, 0, 0))
             score_rect = score.get_rect()
@@ -296,9 +307,9 @@ def menu(death_count):
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                run = False
+                sys.exit()
             if event.type == pygame.KEYDOWN:
                 main()
 
 menu(death_count=0)
+
