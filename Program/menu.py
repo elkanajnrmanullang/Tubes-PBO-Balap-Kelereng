@@ -48,8 +48,56 @@ def play():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
-                    run.siap()
+                    change()
                 if QUIT_BACK.checkForInput(QUIT_MOUSE_POS):
+                    main_menu()
+
+        pygame.display.update()
+
+def change():
+    while True:
+        LANANG_MOUSE_POS = pygame.mouse.get_pos()
+        WEDOK_MOUSE_POS = pygame.mouse.get_pos()
+        MAINMENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        SCREEN.blit(BG,(0,0))
+
+        CHANGE_TEXT = get_font(25).render("Silahkan pilih       karakter mu!", True, "#b68f40")
+        CHANGE_RECT = CHANGE_TEXT.get_rect(center=(530, 130))
+        SCREEN.blit(CHANGE_TEXT, CHANGE_RECT)
+
+        LANANG_IMAGE = pygame.image.load(os.path.join("Assets/Design", "k_run.png"))
+        SCREEN.blit(LANANG_IMAGE, (290, 175))
+
+        WEDOK_IMAGE = pygame.image.load(os.path.join("Assets/Design", "kr_run.png"))
+        SCREEN.blit(WEDOK_IMAGE, (762, 175))
+
+
+        LANANG_BACK = Button(image=None, pos=(315, 335), text_input="Lanang", font=get_font(25), base_color="White", hovering_color="Green")
+
+        LANANG_BACK.changeColor(LANANG_MOUSE_POS)
+        LANANG_BACK.update(SCREEN)
+
+        WEDOK_BACK = Button(image=None, pos=(790, 335), text_input="Wedok", font=get_font(25), base_color="White", hovering_color="Pink")
+
+        WEDOK_BACK.changeColor(WEDOK_MOUSE_POS)
+        WEDOK_BACK.update(SCREEN)
+
+        MAINMENU_BACK = Button(image=None, pos=(1000, 158), text_input="<- main menu", font=get_font(10), base_color="White", hovering_color="Red")
+
+        MAINMENU_BACK.changeColor(MAINMENU_MOUSE_POS)
+        MAINMENU_BACK.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if LANANG_BACK.checkForInput(LANANG_MOUSE_POS):
+                    run.lanang()
+                if WEDOK_BACK.checkForInput(WEDOK_MOUSE_POS):
+                    run.wedok()
+                if MAINMENU_BACK.checkForInput(MAINMENU_MOUSE_POS):
                     main_menu()
 
         pygame.display.update()
