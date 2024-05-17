@@ -5,7 +5,7 @@ import sys
 import json
 from button import Button
 from run import get_font
-from main import main_menu
+from menu import main_menu
 
 pygame.init()
 
@@ -132,7 +132,7 @@ class KarakterLanang:
 
     def draw_hitbox(self, SCREEN):
         SCREEN.blit(self.image, (self.k_rect.x, self.k_rect.y))
-        pygame.draw.rect(SCREEN, (255, 0, 0), self.k_rect, 2)
+        # pygame.draw.rect(SCREEN, (255, 0, 0), self.k_rect, 2)
 
 class BalonUdara():
     def __init__(self):
@@ -181,7 +181,7 @@ class Obstacle:
 
     def draw_hitbox(self, SCREEN):
         SCREEN.blit(self.image, self.rect)
-        pygame.draw.rect(SCREEN, (255, 0, 0), self.rect, 2)
+        # pygame.draw.rect(SCREEN, (255, 0, 0), self.rect, 2)
 
 
 class Drum_Bergerak(Obstacle):
@@ -210,26 +210,31 @@ class Pesawat(Obstacle):
         self.index = 0
 
     def draw_hitbox(self, SCREEN):
-        pygame.draw.rect(SCREEN, (255, 0, 0), self.rect, 2)
+        # pygame.draw.rect(SCREEN, (255, 0, 0), self.rect, 2)
         if self.index >= 9:
             self.index = 0
         SCREEN.blit(self.image, self.rect)
         self.index += 1
 
-# def save_highscore(score):
-#     with open("highscore.json", "w") as file:
-#         json.dump({"highscore": score}, file)
+def load_highscore():
+    try:
+        with open("highscore.json", "r") as file:
+            data = json.load(file)
+            if isinstance(data, dict):
+                return data.get("highscore", 0)
+            else:
+                return 0
+    except (FileNotFoundError, json.JSONDecodeError):
+        return 0
 
-# def load_highscore():
-#     try:
-#         with open("highscore.json", "r") as file:
-#             data = json.load(file)
-#             return data.get("highscore", 0)
-#     except (FileNotFoundError, json.JSONDecodeError):
-#         return 0
+def save_highscore(highscore):
+    with open("highscore.json", "w") as file:
+        json.dump({"highscore": highscore}, file)
+
+highscore = load_highscore()
 
 def main():
-    global game_speed, x_pos_bg, y_pos_bg, points, obstacles
+    global game_speed, x_pos_bg, y_pos_bg, points, obstacles, highscore
     run = True
     clock = pygame.time.Clock()
     lanang = KarakterLanang()
@@ -241,9 +246,11 @@ def main():
     points = 0
     obstacles = []
     death_count = 0
+    
+    highscore = load_highscore()
 
     def score():
-        global points, game_speed
+        global points, game_speed, highscore
         points += 1
         if points % 100 == 0:
             game_speed += 1
@@ -253,11 +260,16 @@ def main():
         textRect.center = (950, 40)
         SCREEN.blit(text, textRect)
 
-        # highscore_text = FONT.render("Highscore: " + str(highscore), True, (0, 0, 0))
-        # highscore_rect = highscore_text.get_rect()
-        # highscore_rect.center = (950, 80)
-        # SCREEN.blit(highscore_text, highscore_rect)
 
+        if points > highscore: 
+            highscore = points
+            save_highscore(highscore)
+
+        highscore_text = FONT.render("Highscore: " + str(highscore), True, (0, 0, 0))
+        highscore_rect = highscore_text.get_rect()
+        highscore_rect.center = (950, 80)
+        SCREEN.blit(highscore_text, highscore_rect)
+    
     def background():
         global x_pos_bg, y_pos_bg
         image_width = BG.get_width()
@@ -307,12 +319,11 @@ def main():
         clock.tick(FPS)
         pygame.display.update()
 
-        if death_count > 0:
-            run = False
+        # if death_count > 0:
+        #     run = False
 
 def menu(death_count):
     global points, highscore
-    # highscore = load_highscore()
     run = True
     while run:
         if death_count == 0:
@@ -327,22 +338,26 @@ def menu(death_count):
             score_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 70)
             SCREEN.blit(score, score_rect)
 
-            # highscore_text = FONT.render("Highscore: " + str(highscore), True, ("Black"))
-            # highscore_rect = highscore_text.get_rect()
-            # highscore_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 110)
-            # SCREEN.blit(highscore_text, highscore_rect)
+            highscore_text = FONT.render("Highscore: " + str(highscore), True, ("White"))
+            highscore_rect = highscore_text.get_rect()
+            highscore_rect.center = (SCREEN_WIDTH // 2 -385, SCREEN_HEIGHT // 2 -142)
+            SCREEN.blit(highscore_text, highscore_rect)
 
-            MAINMENU_MOUSE_POS = pygame.mouse.get_pos()
-            MAINMENU_BACK = Button(image=None, pos=(1000, 158), text_input="<- main menu", font=get_font(10), base_color="White", hovering_color="Red")
+        MAINMENU_MOUSE_POS = pygame.mouse.get_pos()
+        MAINMENU_BACK = Button(image=None, pos=(1000, 158), text_input="<- main menu", font=get_font(10), base_color="White", hovering_color="Red")
 
-            MAINMENU_BACK.changeColor(MAINMENU_MOUSE_POS)
-            MAINMENU_BACK.update(SCREEN)
+        MAINMENU_BACK.changeColor(MAINMENU_MOUSE_POS)
+        MAINMENU_BACK.update(SCREEN)
 
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if MAINMENU_BACK.checkForInput(MAINMENU_MOUSE_POS):
+                    highscore = 0
+                    save_highscore(highscore)
                     main_menu()
             if event.type == pygame.QUIT:
+                highscore = 0
+                save_highscore(highscore)
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
