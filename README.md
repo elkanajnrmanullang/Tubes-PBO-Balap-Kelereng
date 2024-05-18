@@ -146,12 +146,37 @@ Modul - modul yang di gunakan dalam game ini untuk mempermudah pengembangan game
       ```bash
       python main.py
       ```
-   - Di terminal VSCode untuk linux atau mac os, jalankan perintah berikut:
+   - Di terminal VSCode untuk linux atau mac os dengan python versi 3, jalankan perintah berikut:
      ```bash
      python3 main.py
      ```
 
-6. **Informasi Tambahan:**
+6. **Menjalankan Game:**
+   - Ketika di run akan menghasilkan file yang bernama `highscore` dengan format file `.json`, file tersebut berguna sebagai menyimpan highscore yang user mainkan.
+   - File tersebut berasal dari code ini:
+      ```bash
+      #...
+      def load_highscore():
+         try:
+            with open("highscore.json", "r") as file:
+                  data = json.load(file)
+                  if isinstance(data, dict):
+                     return data.get("highscore", 0)
+                  else:
+                     return 0
+         except (FileNotFoundError, json.JSONDecodeError):
+            return 0
+
+      def save_highscore(highscore):
+         with open("highscore.json", "w") as file:
+            json.dump({"highscore": highscore}, file)
+
+      highscore = load_highscore()
+      #...
+      ```
+   - Dari code di atas yang dimana File `highscore.json` dibuat saat `save_highscore(highscore)` pertama kali dipanggil, membuka file dalam mode tulis dan menyimpan skor tertinggi sebagai JSON. Jika file tidak ada, Python akan membuatnya. Fungsi `load_highscore()` membuka dan membaca `highscore.json` untuk memuat skor tertinggi, atau mengembalikan 0 jika file tidak ditemukan atau rusak. File ini menyimpan dan memuat skor tertinggi permainan.
+
+7. **Informasi Tambahan:**
    - Pastikan bahwa semua yang di perlukan sudah terinstal dengan benar.
    - Jika terjadi masalah saat menjalankan game, periksa kembali apakah ada kesalahan dalam instalasi atau konfigurasi lingkungan pengembangan Anda.
 
@@ -162,11 +187,11 @@ Modul - modul yang di gunakan dalam game ini untuk mempermudah pengembangan game
 | Name                      | NIM       | Role      | link Github                                               | 
 | ------------------------- | --------- | --------- | --------------------------------------------------------- |
 | Kevin Naufal Dany  | 122140222 | Project Leader & Programer | [@kevinnaufaldany](https://www.github.com/kevinnaufaldany)|
-| Khoirul Rijal Wicaksono | 122140234 | Programer | [@kevinnaufaldany](https://www.github.com/kevinnaufaldany)|
+| Khoirul Rijal Wicaksono | 122140234 | Programer | [@wicaksono0](https://www.github.com/wicaksono0)|
 | Elkana Jnr Manullang | 122140168 | Programer | [@elkanajnrmanullang](https://www.github.com/elkanajnrmanullang)|
 | Rayhan Fadel Irwanto | 122140236 | Programer | [@kevinnaufaldany](https://www.github.com/kevinnaufaldany)|
-| Roy Vanzeus Maulana  | 122140238 | Designer | [@kevinnaufaldany](https://www.github.com/kevinnaufaldany)|
-| Ferdinand Yehezkiel Hutapea | 122140233 | Designer | [@kevinnaufaldany](https://www.github.com/kevinnaufaldany)|
+| Roy Vanzeus Maulana  | 122140238 | Designer | [@royvanzeus](https://www.github.com/royvanzeus)|
+| Ferdinand Yehezkiel Hutapea | 122140233 | Designer | [@Yehezkiel13](https://www.github.com/Yehezkiel13)| 
 
 
 

@@ -5,7 +5,7 @@ import sys
 import json
 from button import Button
 from run import get_font
-from menu import main_menu
+from main import main_menu
 
 pygame.init()
 
