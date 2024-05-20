@@ -92,7 +92,7 @@ Modul - modul yang di gunakan dalam game ini untuk mempermudah pengembangan game
       #...
       ```
 
-5. **json**: Modul ini menyediakan fungsionalitas untuk membaca dan menulis data dalam format JSON (JavaScript Object Notation), yang merupakan format pertukaran data yang umum digunakan dalam aplikasi web dan lainnya. Dengan modul ini, Anda dapat dengan mudah mengonversi struktur data Python ke format JSON dan sebaliknya.
+5. **json**: Modul ini menyediakan fungsionalitas untuk membaca dan menulis data dalam format JSON (JavaScript Object Notation), yang merupakan format pertukaran data yang umum digunakan dalam aplikasi web dan lainnya. Dengan modul ini, dengan ini program dapat dengan mudah mengonversi struktur data Python ke format JSON dan sebaliknya.
    ```bash
    import json
    ```
