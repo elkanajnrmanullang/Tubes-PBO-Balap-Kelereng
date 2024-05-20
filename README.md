@@ -182,6 +182,45 @@ Modul - modul yang di gunakan dalam game ini untuk mempermudah pengembangan game
 
 *Selamat Bermain!*
 
+## Class Diagram
+Class diagram adalah jenis diagram struktur statis dalam UML yang menggambarkan struktur sistem dengan menunjukkan sistem class, atributnya, metode, dan hubungan antar objek. Class diagram dapat merepresentasikan class yang membentuk aplikasi atau sistem, dan juga class abstrak, antarmuka, dan struktur data lain yang terkait. Class diagram memberikan data berupa hubungan apa yang terjadi diantara kelas-kelas, bukan menjelaskan kejadiannya.
+
+- **Class Diagram Lanang**
+   <img src= "Assets/laporan/classdiagram_lanang.png" style= width:100%> 
+   - **Karakter Lanang**: Mewakili karakter utama anak laki-laki, memiliki atribut seperti posisi, gambar, dan suara, serta metode untuk bergerak, melompat, dan berenang dengan bebek.
+   - **Drum Diam, Pesawat, dan Obstacle**: Mewakili rintangan yang muncul di layar, dengan atribut seperti posisi, gambar, dan metode untuk memperbarui status dan menggambar kotak tabrakan.
+   - **Drum Bergerak**: Merupakan rintangan drum dengan tambahan atribut kecepatan dan metode untuk memperbarui status dan menggambar kotak tabrakan.
+   - **Balon Udara**: Merupakan property tambahan yang tidak berinteraksi dengan karakter, yang memiliki atribut seperti x,y sebagai posisi awal dari Balon Udara.
+   - **Airship**: Merupakan property tambahan yang tidak berinteraksi dengan karakter, yang memiliki atribut seperti x,y sebagai posisi awal dan dengan tambahan atribut kecepatan dari Airship.
+
+   - Hubungan antar kelas digambarkan dengan garis penghubung, menunjukkan interaksi dan kolaborasi antar kelas untuk menjalankan aplikasi.
+
+- **Class Diagram Wedok**
+    <img src= "Assets/laporan/classdiagram_wedok.png" style= width:100%> 
+   - **Karakter Lanang**: Mewakili karakter utama anak perempuan, memiliki atribut seperti posisi, gambar, dan suara, serta metode untuk bergerak, melompat, dan berenang dengan bebek.
+   - **Drum Diam, Pesawat, dan Obstacle**: Mewakili rintangan yang muncul di layar, dengan atribut seperti posisi, gambar, dan metode untuk memperbarui status dan menggambar kotak tabrakan.
+   - **Drum Bergerak**: Merupakan rintangan drum dengan tambahan atribut kecepatan dan metode untuk memperbarui status dan menggambar kotak tabrakan.
+   - **Balon Udara**: Merupakan property tambahan yang tidak berinteraksi dengan karakter, yang memiliki atribut seperti x,y sebagai posisi awal dari Balon Udara.
+   - **Airship**: Merupakan property tambahan yang tidak berinteraksi dengan karakter, yang memiliki atribut seperti x,y sebagai posisi awal dan dengan tambahan atribut kecepatan dari Airship.
+
+   - Hubungan antar kelas digambarkan dengan garis penghubung, menunjukkan interaksi dan kolaborasi antar kelas untuk menjalankan aplikasi.
+
+- **Class Diagram Main**
+
+   <img src= "Assets/laporan/main.png" style= width:70%> 
+
+   - **Button**: Kelas ini mewakili tombol pada layar. Class ini memiliki atribut untuk menentukan gambar, posisi, font, warna, dan teks tombol. Selain itu, class ini memiliki metode untuk menginisialisasi tombol, memperbarui tampilannya, memeriksa input pengguna, dan mengubah warnanya.
+   - **Main**: Kelas ini mewakili aplikasi utama. Class ini memiliki atribut untuk menyimpan permukaan layar dan gambar latar belakang. Selain itu, class ini memiliki metode untuk mendapatkan objek font, memulai permainan, mengubah status permainan, menampilkan menu utama, menjalankan loop utama aplikasi, memulai permainan dengan pemain lanang atau wedok, dan sebagai titik masuk utama aplikasi.
+   - Interaksi Antar Class Button dan Main berinteraksi satu sama lain untuk menghasilkan fungsionalitas tombol pada aplikasi. Class Main membuat objek Button dan menentukan gambar, posisi, font, warna, dan teks tombol. Class Main juga memanggil metode update class Button untuk memperbarui tampilan tombol pada layar. Ketika pengguna mengklik tombol, class Button memanggil metode changeColor untuk mengubah warnanya. Class Main kemudian dapat mendeteksi perubahan warna ini dan mengambil tindakan yang sesuai, seperti memulai permainan atau mengubah status permainan.
+
+
+## Referensi
+Game [Dino Chrome](chrome://dino/) menjadi referensi unik bagi saya, game yang simple dan sangat cocok bagi semua kalangan. Maka dari itu game ini kami buat dengan gameplay yang mirip sekali dengan game [Dino Chrome](chrome://dino/) tetapi kami buat lebih menarik yang bertemakan kemerdekaan indonesia.
+- Referensi Pengerjaan
+   - [Game](https://www.youtube.com/playlist?list=PL30AETbxgR-fAbwiuU1vDl3owNUPUuVrz)
+   - [Menu](  
+   https://youtu.be/GMBqjxcKogA?si=KMpFqz2qqjGkHtJp)
+
 ## Author
 
 | Name                      | NIM       | Role      | link Github                                               | 
@@ -189,7 +228,7 @@ Modul - modul yang di gunakan dalam game ini untuk mempermudah pengembangan game
 | Kevin Naufal Dany  | 122140222 | Project Leader & Programer | [@kevinnaufaldany](https://www.github.com/kevinnaufaldany)|
 | Khoirul Rijal Wicaksono | 122140234 | Programer | [@wicaksono0](https://www.github.com/wicaksono0)|
 | Elkana Jnr Manullang | 122140168 | Programer | [@elkanajnrmanullang](https://www.github.com/elkanajnrmanullang)|
-| Rayhan Fadel Irwanto | 122140236 | Programer | [@kevinnaufaldany](https://www.github.com/kevinnaufaldany)|
+| Rayhan Fadel Irwanto | 122140236 | Programer | [@Rayhan-Fadel-Irwanto](https://www.github.com/Rayhan-Fadel-Irwanto)|
 | Roy Vanzeus Maulana  | 122140238 | Designer | [@royvanzeus](https://www.github.com/royvanzeus)|
 | Ferdinand Yehezkiel Hutapea | 122140233 | Designer | [@Yehezkiel13](https://www.github.com/Yehezkiel13)| 
 
