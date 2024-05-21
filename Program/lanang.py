@@ -56,6 +56,7 @@ class KarakterLanang:
     k_jump_value = 8
 
     def __init__(self):
+        self.lanang_rect = pygame.Rect(80, 390, 50, 50)
         self.duck_img = DUCK
         self.run_img = RUN
         self.jump_img = JUMP
