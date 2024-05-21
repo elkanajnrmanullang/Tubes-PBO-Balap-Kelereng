@@ -118,7 +118,7 @@ Modul - modul yang di gunakan dalam game ini untuk mempermudah pengembangan game
       #...
       ```
 
-## Bagaimana cara memainkanya?
+## Apa yang di  butuhkan?
 1. **Unduh Game:**
    - Download zip clone di terminal linux, mac os, atau git bash melalui link: 
       ```bash
@@ -142,16 +142,12 @@ Modul - modul yang di gunakan dalam game ini untuk mempermudah pengembangan game
 
 5. **Menjalankan Game:**
    - Untuk menjalankan game, Anda perlu membuka folder program dan anda dapat menjalankan/ runing di file `main.py`.
-   - Di terminal VSCode untuk windows, jalankan perintah berikut:
+   - Di terminal VSCode, jalankan perintah berikut:
       ```bash
       python main.py
       ```
-   - Di terminal VSCode untuk linux atau mac os dengan python versi 3, jalankan perintah berikut:
-     ```bash
-     python3 main.py
-     ```
 
-6. **Menjalankan Game:**
+6. **Informasi Tambahan:**
    - Ketika di run akan menghasilkan file yang bernama `highscore` dengan format file `.json`, file tersebut berguna sebagai menyimpan highscore yang user mainkan.
    - File tersebut berasal dari code ini:
       ```bash
@@ -175,12 +171,55 @@ Modul - modul yang di gunakan dalam game ini untuk mempermudah pengembangan game
       #...
       ```
    - Dari code di atas yang dimana File `highscore.json` dibuat saat `save_highscore(highscore)` pertama kali dipanggil, membuka file dalam mode tulis dan menyimpan skor tertinggi sebagai JSON. Jika file tidak ada, Python akan membuatnya. Fungsi `load_highscore()` membuka dan membaca `highscore.json` untuk memuat skor tertinggi, atau mengembalikan 0 jika file tidak ditemukan atau rusak. File ini menyimpan dan memuat skor tertinggi permainan.
-
-7. **Informasi Tambahan:**
-   - Pastikan bahwa semua yang di perlukan sudah terinstal dengan benar.
-   - Jika terjadi masalah saat menjalankan game, periksa kembali apakah ada kesalahan dalam instalasi atau konfigurasi lingkungan pengembangan Anda.
+      - Pastikan bahwa semua yang di perlukan sudah terinstal dengan benar.
+      - Jika terjadi masalah saat menjalankan game, periksa kembali apakah ada kesalahan dalam instalasi atau konfigurasi lingkungan pengembangan Anda.
 
 *Selamat Bermain!*
+
+## Cara Bermain Game
+   1. **Menu**
+      - Berikut adalah cara bermain
+      Untuk tampilan awal kita disuguhkan dengan tampilan menu yang terdapat dua pilihan yaitu:
+         - Play
+         - Quit
+
+      <img src= "Assets/laporan/main_menu.png" style= width:100%>
+
+   2. **Siap**
+      - Setelah memilih pilihan play selanjutnya tampilan akan menampilkan pertanyaan Apakah kamu siap? dan ditampilkan dengan 2 jawaban yaitu siap atau belom
+
+         - jika kita memilih siap maka kita akan lanjut ketampilan berikutnya yaitu pemilihan karakter
+
+         - Jika kita memilih pilihan belum maka kita akn kembali ke menu awal
+  
+  
+      <img src= "Assets/laporan/siap.png" style= width:100%>
+
+   3. **Pemilihan Karakter**
+      - Tampilan berikutnya adalah tampilan pemilihan karakter yang terdiri dari 2 karakter, yaitu karakter lanang dan karakter wedok
+   
+      <img src= "Assets/laporan/pilih_char.png" style= width:100%>
+
+   4. **Memulai Game**
+      - Setelah memilih karakter kita akan mulai memainkan gamenya
+   
+         - Ini adalah tampilan dari karakter lanang dalam game
+         <img src= "Assets/laporan/tampilan_game_lanang.png" style= width:100%>
+   
+   
+         - ini adalah tampilan dari karakter wedok dalam game
+         <img src= "Assets/laporan/tampilan_game_wedok.png" style= width:100%>
+   
+   
+   4. **Tampilan Dead**
+      - Ketika karakter menabrak obstacle maka tampilan dead akan seperti ini
+         - ini adalah gambaran dari tampilan ketika karakter lanang mati
+      <img src= "Assets/laporan/tampilan_dead_lanang.png" style= width:100%> 
+      
+         - ini adalah gambaran dari tampilan ketika karakter wedok mati
+      <img src= "Assets/laporan/tampilan_dead_wedok.png" style= width:100%>
+   
+   
 
 ## Class Diagram
 Class diagram adalah jenis diagram struktur statis dalam UML yang menggambarkan struktur sistem dengan menunjukkan sistem class, atributnya, metode, dan hubungan antar objek. Class diagram dapat merepresentasikan class yang membentuk aplikasi atau sistem, dan juga class abstrak, antarmuka, dan struktur data lain yang terkait. Class diagram memberikan data berupa hubungan apa yang terjadi diantara kelas-kelas, bukan menjelaskan kejadiannya.
