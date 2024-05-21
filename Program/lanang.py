@@ -56,7 +56,6 @@ class KarakterLanang:
     k_jump_value = 8
 
     def __init__(self):
-        self.lanang_rect = pygame.Rect(80, 390, 50, 50)
         self.duck_img = DUCK
         self.run_img = RUN
         self.jump_img = JUMP
@@ -134,7 +133,6 @@ class KarakterLanang:
     def draw_hitbox(self, SCREEN):
         SCREEN.blit(self.image, (self.k_rect.x, self.k_rect.y))
         # pygame.draw.rect(SCREEN, (255, 0, 0), self.k_rect, 2)
-
 class BalonUdara():
     def __init__(self):
         self.x = SCREEN_WIDTH + random.randint(800, 1000)
@@ -142,7 +140,7 @@ class BalonUdara():
         self.image = BALON_UDARA
         self.width = self.image.get_width()
 
-    def update(self):
+    def update(self, game_speed):
         self.x -= game_speed
         if self.x < -self.width:
             self.x = SCREEN_WIDTH + random.randint(2500, 3000)
@@ -150,7 +148,6 @@ class BalonUdara():
 
     def draw_hitbox(self, SCREEN):
         SCREEN.blit(self.image, (self.x, self.y))
-
 class Airship():
     def __init__(self):
         self.x = -random.randint(800, 1000)  
@@ -159,7 +156,7 @@ class Airship():
         self.width = self.image.get_width()
         self.speed = 1  
 
-    def update(self):
+    def update(self, game_speed):
         self.x += self.speed
         if self.x > SCREEN_WIDTH:
             self.x = -random.randint(800, 1000) 
@@ -310,10 +307,10 @@ def main():
                 menu(death_count)
 
         balon_udara_property.draw_hitbox(SCREEN)
-        balon_udara_property.update()
+        balon_udara_property.update(game_speed)
 
         airship_property.draw_hitbox(SCREEN)
-        airship_property.update()
+        airship_property.update(game_speed)
 
         score()
 

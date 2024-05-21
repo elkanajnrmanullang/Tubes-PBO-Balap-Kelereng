@@ -141,7 +141,7 @@ class BalonUdara():
         self.image = BALON_UDARA
         self.width = self.image.get_width()
 
-    def update(self):
+    def update(self, game_speed):
         self.x -= game_speed
         if self.x < -self.width:
             self.x = SCREEN_WIDTH + random.randint(2500, 3000)
@@ -149,7 +149,6 @@ class BalonUdara():
 
     def draw_hitbox(self, SCREEN):
         SCREEN.blit(self.image, (self.x, self.y))
-
 class Airship():
     def __init__(self):
         self.x = -random.randint(800, 1000)  
@@ -158,7 +157,7 @@ class Airship():
         self.width = self.image.get_width()
         self.speed = 1  
 
-    def update(self):
+    def update(self, game_speed):
         self.x += self.speed
         if self.x > SCREEN_WIDTH:
             self.x = -random.randint(800, 1000) 
@@ -166,7 +165,6 @@ class Airship():
 
     def draw_hitbox(self, SCREEN):
         SCREEN.blit(self.image, (self.x, self.y))
-
 class Obstacle:
     def __init__(self, image, type):
         self.image = image
@@ -308,10 +306,10 @@ def main():
                 menu(death_count)
 
         balon_udara_property.draw_hitbox(SCREEN)
-        balon_udara_property.update()
+        balon_udara_property.update(game_speed)
 
         airship_property.draw_hitbox(SCREEN)
-        airship_property.update()
+        airship_property.update(game_speed)
 
         score()
 

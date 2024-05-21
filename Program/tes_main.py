@@ -11,9 +11,8 @@ class TestMainMenu(unittest.TestCase):
     def test_main_menu(self):
         try:
             main_menu()
-            self.assertTrue(True)  # If we reach here, the main menu runs without errors
         except SystemExit:
-            self.assertTrue(True)  # This means the game window was closed, which is fine
+            self.assertTrue(True)  
 
     def test_play_button(self):
         button = Button(image=None, pos=(315, 275), text_input="PLAY", font=get_font(55), base_color="#d7fcd4", hovering_color="Green")
