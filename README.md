@@ -260,6 +260,11 @@ Game [Dino Chrome](chrome://dino/) menjadi referensi unik bagi saya, game yang s
    - [Menu](  
    https://youtu.be/GMBqjxcKogA?si=KMpFqz2qqjGkHtJp)
 
+## Lampiran
+- [Vidio-Presentasi](https://drive.google.com/file/d/1qw7khSkycpsvOleWiVPywmti3Q2RFTfA/view?usp=drive_link)
+- [PPT](https://docs.google.com/presentation/d/1xE5iGS3vIpvwS_DZXa8lJcjmRbI2tboM/edit?usp=drive_link&ouid=109592601539748178727&rtpof=true&sd=true)
+- [Demo-Game](https://drive.google.com/file/d/1rtuQuPdeaNhA4d9j4w-PXCRA7entsxOB/view?usp=drive_link)
+
 ## Author
 
 | Name                      | NIM       | Role      | link Github                                               | 
